@@ -79,6 +79,7 @@ SETGATE(intr, 1,2,3,0);
 #### 练习一
 
 1. 请在ucore中找一段你认为难度适当的AT&T格式X86汇编代码，尝试解释其含义。
+```
 seta20.1:
     inb $0x64, %al                                  # Wait for not busy(8042 input buffer empty).
     testb $0x2, %al
@@ -86,6 +87,7 @@ seta20.1:
 
     movb $0xd1, %al                                 # 0xd1 -> port 0x64
     outb %al, $0x64 # 0xd1 means: write data to 8042's P2 port
+```
 解释：0x64是8042的一个端口，首先从0x64读取状态到al寄存器，判断是否为0x2，如果是，说明缓冲区非空，跳转到seta20.1处执行。若缓冲区为空，那么继续执行，将0xd1发送到0x64端口
 2. (option)请在rcore中找一段你认为难度适当的RV汇编代码，尝试解释其含义。
 
